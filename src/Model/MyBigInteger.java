@@ -52,7 +52,6 @@ public class MyBigInteger {
         //Si al final sobra 1 en el carry, lo concatenamos al total final
         if(carry == 1)
             result= "1" + result;
-        System.out.println(MyBigInteger.subOperation);
         if(MyBigInteger.subOperation == 2)
             result = "-" + result;
         
@@ -106,17 +105,27 @@ public class MyBigInteger {
     
     //Función de multiplicar a medias
     public MyBigInteger multiply(MyBigInteger pNumber){
-        String result = bigNumber;
-        for(int i = 0; i < Integer.parseInt(pNumber.valueOf()) - 1;  i++)
+        String result = bigNumber.replaceAll("-", "");
+        String p1 = bigNumber.substring(0, 1);
+        String p2 = pNumber.valueOf().substring(0, 1);
+        
+        bigNumber = bigNumber.replaceAll("-", "");
+        pNumber.setNumero(pNumber.valueOf().replaceAll("-", ""));
+                
+        for(int i = 0; i < Integer.parseInt(pNumber.valueOf()) - 1;  i++){
             result = add(new MyBigInteger(result)).valueOf();
-        System.out.println(abs("1000001923").valueOf());
+        }
+        
+        if(("-".equals(p1) && !"-".equals(p2)) || (!"-".equals(p1) && "-".equals(p2)))
+            result = "-" + result;
+        
         return new MyBigInteger(result);
     }
     
     //Función de valor absoluto
-    public MyBigInteger abs(String pNumero){
+    public MyBigInteger abs(){
         String result = "";
-        char[] num1Array = pNumero.toCharArray();
+        char[] num1Array = this.bigNumber.toCharArray();
         if(num1Array[0] == '-')
             num1Array = Arrays.copyOfRange(num1Array, 1, num1Array.length);
             

@@ -45,18 +45,35 @@ public class DataInput {
         this.currentNumber = "";
     }
     
-    public void executeAdd(){
-        MyBigInteger number1 = new MyBigInteger(this.total);
-        MyBigInteger number2 = new MyBigInteger(this.currentNumber);
-        MyBigInteger result = number1.add(number2);
-        this.total = result.valueOf();
-        this.currentNumber = "";
+    public MyBigInteger applyResult(MyBigInteger pNumber1, MyBigInteger pNumber2, String pType){
+        MyBigInteger result = null;
+        try{
+            switch(pType){
+                case "+":
+                    result = pNumber1.add(pNumber2);
+                    break;
+                case "-":
+                    result = pNumber1.sub(pNumber2);
+                    break;
+                case "*":
+                    result = pNumber1.multiply(pNumber2);
+                    break;
+                case "abs":
+                    result = pNumber2.abs();
+                    break;
+                  
+            }
+        }catch(Exception e){
+            System.out.println("Error " + e.getMessage());
+        }
+        
+        return result;
     }
     
-    public void executeSub(){
+    public void executeOperation(String pType){
         MyBigInteger number1 = new MyBigInteger(this.total);
         MyBigInteger number2 = new MyBigInteger(this.currentNumber);
-        MyBigInteger result = number1.sub(number2);
+        MyBigInteger result = applyResult(number1, number2, pType);
         this.total = result.valueOf();
         this.currentNumber = "";
     }

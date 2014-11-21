@@ -100,6 +100,7 @@ public class FrmCalculator extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         tbxResult = new javax.swing.JTextField();
         tbxOperations = new javax.swing.JTextField();
+        btnAbs = new javax.swing.JButton();
 
         jButton5.setText("3");
 
@@ -289,6 +290,11 @@ public class FrmCalculator extends javax.swing.JFrame {
         btnMultiply.setText("*");
         btnMultiply.setBorder(null);
         btnMultiply.setFocusPainted(false);
+        btnMultiply.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMultiplyActionPerformed(evt);
+            }
+        });
 
         btnDivision.setBackground(new java.awt.Color(69, 68, 75));
         btnDivision.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -382,6 +388,18 @@ public class FrmCalculator extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnAbs.setBackground(new java.awt.Color(69, 68, 75));
+        btnAbs.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnAbs.setForeground(new java.awt.Color(255, 255, 255));
+        btnAbs.setText("abs");
+        btnAbs.setBorder(null);
+        btnAbs.setFocusPainted(false);
+        btnAbs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAbsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
@@ -417,7 +435,9 @@ public class FrmCalculator extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnSix, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnMultiply, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnMultiply, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnAbs, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(mainPanelLayout.createSequentialGroup()
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(btnZero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -462,7 +482,8 @@ public class FrmCalculator extends javax.swing.JFrame {
                     .addComponent(btnFour, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnFive, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSix, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnMultiply, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnMultiply, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAbs, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(mainPanelLayout.createSequentialGroup()
@@ -533,6 +554,16 @@ public class FrmCalculator extends javax.swing.JFrame {
         switch(controller.getLastOperation()){
             case "+":
                 btnAdd.doClick();
+                break;
+            case "-":
+                btnMinus.doClick();
+                break;
+            case "*":
+                btnMultiply.doClick();
+                break;
+            case "abs":
+                btnAbs.doClick();
+                break;                
         }
 
     }//GEN-LAST:event_btnEqualActionPerformed
@@ -605,6 +636,14 @@ public class FrmCalculator extends javax.swing.JFrame {
         mainPanel.requestFocusInWindow();
     }//GEN-LAST:event_btnPasteActionActionPerformed
 
+    private void btnAbsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbsActionPerformed
+        executeOperation("abs");
+    }//GEN-LAST:event_btnAbsActionPerformed
+
+    private void btnMultiplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMultiplyActionPerformed
+        executeOperation("*");
+    }//GEN-LAST:event_btnMultiplyActionPerformed
+
     public void sendResult(String pNumber){
         //Llamamos al controlador para procesar el resultado
         accessFlag = false;
@@ -621,8 +660,8 @@ public class FrmCalculator extends javax.swing.JFrame {
             accessFlag = true;
             minusFlag = true;
             controller.setLastOperation(pType);
-            if(tbxOperations.getText().length() != 0){
-                tbxOperations.setText(tbxOperations.getText() + tbxResult.getText() + controller.getLastOperation());
+            if(tbxOperations.getText().length() != 0 || pType.equals("abs")){
+                tbxOperations.setText(tbxOperations.getText() + tbxResult.getText() + " | " +  controller.getLastOperation() + " | ");
                 controller.sendOperationMessage();
             }else{
                 tbxOperations.setText(tbxResult.getText() + controller.getLastOperation());
@@ -674,6 +713,7 @@ public class FrmCalculator extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAbs;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBackspace;
     private javax.swing.JButton btnClean;

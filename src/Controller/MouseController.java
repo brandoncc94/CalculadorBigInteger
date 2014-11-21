@@ -57,7 +57,7 @@ public class MouseController extends MouseAdapter {
 
         popup.add(cutAction);
 
-        copyAction = new AbstractAction("Copy") {
+        copyAction = new AbstractAction("Copiar") {
 
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -73,10 +73,10 @@ public class MouseController extends MouseAdapter {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 lastActionSelected = Actions.PASTE;
-                savedString = textComponent.getText().replaceAll("[^0-9]", "");
+                savedString = textComponent.getText().replaceAll("[^-0-9]", "");
                 textComponent.paste();
                 pView.cleanResult();
-                pView.sendResult(textComponent.getText().replaceAll("[^0-9]", ""));
+                pView.sendResult(textComponent.getText().replaceAll("[^-0-9]", ""));
                 pView.getComponent(0).requestFocusInWindow();
             }
         };
