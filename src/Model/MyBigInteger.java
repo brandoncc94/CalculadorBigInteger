@@ -145,37 +145,35 @@ public class MyBigInteger {
             parciales = new ArrayList<>();
         }
         
-        System.out.println(listaParciales);
-        String primero = String.valueOf(listaParciales.get(0).get(listaParciales.get(0).size() - 1));
-        primero = new StringBuilder(primero).reverse().toString();
-        
-        for(int n = 0; n < ((num1Array.length + num2Array.length) - 1); n++){
+        for(int n = 0; n < (num1Array.length + num2Array.length); n++){
             MSD.add(0);
             LSD.add(0);
         }
-        System.out.println(MSD);
-
-        if(primero.length() > 1)
-            MSD.set((MSD.size() - 2), Character.getNumericValue(primero.charAt(1)));
-        
-        LSD.set(LSD.size() - 1, Character.getNumericValue(primero.charAt(0)));
-        
-        System.out.println(MSD);
-        System.out.println(LSD);
-        System.out.println("fin");
-        
-        
-        for(int i = num1Array.length - 1; i >= 0; i--){
-            subTotal = (num1Array[i] - '0') * (num2Array[i] + resto);
-            if(subTotal <= '9'){
-                System.out.println(subTotal);
-                result= (char) subTotal +result;	
-                resto = 0;
+        int maximo = Math.max(num1Array.length, num2Array.length);
+        int subMSD = 0, subLSD = 0;
+        for(int j = 0; j < listaParciales.get(0).size(); j++){
+            subMSD = 0;
+            subLSD = 0;
+            for(int k = 0; k < maximo; k++){
+                String num = String.valueOf(listaParciales.get(k).get(j));
+                num = new StringBuilder(num).reverse().toString();
+                try{
+                    subMSD += Character.getNumericValue(num.charAt(1));
+                }catch(Exception e){ }
+                
+                subLSD += Character.getNumericValue(num.charAt(0));
             }
-            else{		
-                System.out.println(Integer.parseInt(Character.toString(String.valueOf(subTotal).charAt(0))));
-                result = (char) (subTotal - (10 * Integer.parseInt(Character.toString(String.valueOf(subTotal).charAt(0))))) + result;
-                resto = Integer.parseInt(Character.toString(String.valueOf(subTotal).charAt(0)));
+            MSD.set(j, subMSD);
+            LSD.set(j + 1, subLSD);
+        }
+        for(int i = MSD.size() - 1; i >= 0; i--){
+            subTotal = MSD.get(i) + LSD.get(i) + resto;
+            if(subTotal <= 9){
+                result = subTotal + result;
+                resto = 0;
+            }else{
+                resto = new Double(subTotal/10).intValue();
+                result = (subTotal - (10 * resto)) + result;
             }
         }
         
@@ -183,6 +181,10 @@ public class MyBigInteger {
             result = "-" + result;
         
         return new MyBigInteger(result);
+    }
+    
+    public MyBigInteger division(MyBigInteger pNumber){
+        return null;
     }
     
     //Función de valor absoluto

@@ -302,6 +302,11 @@ public class FrmCalculator extends javax.swing.JFrame {
         btnDivision.setText("/");
         btnDivision.setBorder(null);
         btnDivision.setFocusPainted(false);
+        btnDivision.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDivisionActionPerformed(evt);
+            }
+        });
 
         btnEqual.setBackground(new java.awt.Color(90, 183, 227));
         btnEqual.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -643,6 +648,10 @@ public class FrmCalculator extends javax.swing.JFrame {
     private void btnMultiplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMultiplyActionPerformed
         executeOperation("*");
     }//GEN-LAST:event_btnMultiplyActionPerformed
+
+    private void btnDivisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDivisionActionPerformed
+        executeOperation("/");
+    }//GEN-LAST:event_btnDivisionActionPerformed
 
     public void sendResult(String pNumber){
         //Llamamos al controlador para procesar el resultado
