@@ -3,6 +3,7 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class MyBigInteger {
     private String bigNumber;
@@ -40,12 +41,12 @@ public class MyBigInteger {
         for(int i = num1Array.length - 1; i >= 0; i--){
             subTotal = (num1Array[i] - '0') + (num2Array[i] + carry);
             if(subTotal <= '9'){
-                    result= (char) subTotal +result;	
-                    carry = 0;
+                result= (char) subTotal +result;	
+                carry = 0;
             }
             else{		
-                    result = (char) (subTotal - 10) + result;
-                    carry = 1;
+                result = (char) (subTotal - 10) + result;
+                carry = 1;
             }
         }
         
@@ -105,15 +106,77 @@ public class MyBigInteger {
     
     //Función de multiplicar a medias
     public MyBigInteger multiply(MyBigInteger pNumber){
-        String result = bigNumber.replaceAll("-", "");
+        String result = "";
         String p1 = bigNumber.substring(0, 1);
         String p2 = pNumber.valueOf().substring(0, 1);
         
         bigNumber = bigNumber.replaceAll("-", "");
         pNumber.setNumero(pNumber.valueOf().replaceAll("-", ""));
-                
-        for(int i = 0; i < Integer.parseInt(pNumber.valueOf()) - 1;  i++){
-            result = add(new MyBigInteger(result)).valueOf();
+         
+        int resto = 0;
+        bigNumber = new StringBuilder(bigNumber).reverse().toString();
+        String pNumber2 = new StringBuilder(pNumber.valueOf()).reverse().toString();
+            
+        // Convertimos el string a un arreglo de char's
+        char[] num1Array = bigNumber.toCharArray();
+        char[] num2Array = pNumber2.toCharArray();
+        ArrayList<Integer> parciales = new ArrayList<>();
+        ArrayList<ArrayList<Integer>> listaParciales = new ArrayList<>();
+        ArrayList<Integer> MSD = new ArrayList<>();
+        ArrayList<Integer> LSD = new ArrayList<>();
+        int subTotal, cont;
+        
+        for(int k = 0; k < num2Array.length; k++){
+            cont = k;
+            for(int n = 0; n < ((num1Array.length + num2Array.length) - 1); n++)
+                parciales.add(0);
+            
+            for(int j = 0; j < ((num1Array.length + num2Array.length) - 1); j++){
+                try{
+                    if(cont == 0)
+                        parciales.set(j, Character.getNumericValue(num1Array[j - k]) * Character.getNumericValue(num2Array[k]));
+                    else
+                        cont--;
+                }catch(Exception e){ 
+                }
+            }
+            Collections.reverse(parciales);
+            listaParciales.add(parciales);
+            parciales = new ArrayList<>();
+        }
+        
+        System.out.println(listaParciales);
+        String primero = String.valueOf(listaParciales.get(0).get(listaParciales.get(0).size() - 1));
+        primero = new StringBuilder(primero).reverse().toString();
+        
+        for(int n = 0; n < ((num1Array.length + num2Array.length) - 1); n++){
+            MSD.add(0);
+            LSD.add(0);
+        }
+        System.out.println(MSD);
+
+        if(primero.length() > 1)
+            MSD.set((MSD.size() - 2), Character.getNumericValue(primero.charAt(1)));
+        
+        LSD.set(LSD.size() - 1, Character.getNumericValue(primero.charAt(0)));
+        
+        System.out.println(MSD);
+        System.out.println(LSD);
+        System.out.println("fin");
+        
+        
+        for(int i = num1Array.length - 1; i >= 0; i--){
+            subTotal = (num1Array[i] - '0') * (num2Array[i] + resto);
+            if(subTotal <= '9'){
+                System.out.println(subTotal);
+                result= (char) subTotal +result;	
+                resto = 0;
+            }
+            else{		
+                System.out.println(Integer.parseInt(Character.toString(String.valueOf(subTotal).charAt(0))));
+                result = (char) (subTotal - (10 * Integer.parseInt(Character.toString(String.valueOf(subTotal).charAt(0))))) + result;
+                resto = Integer.parseInt(Character.toString(String.valueOf(subTotal).charAt(0)));
+            }
         }
         
         if(("-".equals(p1) && !"-".equals(p2)) || (!"-".equals(p1) && "-".equals(p2)))
