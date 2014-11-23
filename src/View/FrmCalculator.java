@@ -750,7 +750,7 @@ public class FrmCalculator extends javax.swing.JFrame {
             case "fibo":
                 btnFibo.doClick();
                 break;
-            case "!primo":
+            case "!prima":
                 btnFactPrimaUnica.doClick();
                 break;
             case "factores":
@@ -875,7 +875,7 @@ public class FrmCalculator extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFactorialActionPerformed
 
     private void btnFactPrimaUnicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFactPrimaUnicaActionPerformed
-        // TODO add your handling code here:
+        executeOperation("!prima");
     }//GEN-LAST:event_btnFactPrimaUnicaActionPerformed
 
     private void btnCantFactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCantFactActionPerformed
@@ -902,7 +902,7 @@ public class FrmCalculator extends javax.swing.JFrame {
             accessFlag = true;
             minusFlag = true;
             controller.setLastOperation(pType);
-            if(tbxOperations.getText().length() != 0 || pType.equals("abs") || pType.equals("!")){
+            if(tbxOperations.getText().length() != 0 || pType.equals("abs") || pType.equals("!") || pType.equals("!prima")){
                 tbxOperations.setText(tbxOperations.getText() + tbxResult.getText() + " | " +  controller.getLastOperation() + " | ");
                 controller.sendOperationMessage();
             }else{

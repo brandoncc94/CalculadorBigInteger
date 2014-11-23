@@ -101,10 +101,8 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="btnMCM" min="-2" pref="59" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="btnPow" alignment="0" min="-2" pref="59" max="-2" attributes="0"/>
-                                  <Component id="btnMCD" alignment="0" min="-2" pref="59" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="btnPow" alignment="0" min="-2" pref="59" max="-2" attributes="0"/>
+                              <Component id="btnMCD" alignment="0" min="-2" pref="59" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="37" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
