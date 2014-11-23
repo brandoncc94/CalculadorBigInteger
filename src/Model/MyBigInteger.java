@@ -101,7 +101,7 @@ public class MyBigInteger {
             }   
         }
         MyBigInteger.subOperation = 2;
-        return new MyBigInteger(result);
+        return new MyBigInteger(result.replaceAll("^0+(?!$)", ""));
     }
     
     //Función de multiplicar a medias
@@ -149,12 +149,12 @@ public class MyBigInteger {
             MSD.add(0);
             LSD.add(0);
         }
-        int maximo = Math.max(num1Array.length, num2Array.length);
+        
         int subMSD = 0, subLSD = 0;
         for(int j = 0; j < listaParciales.get(0).size(); j++){
             subMSD = 0;
             subLSD = 0;
-            for(int k = 0; k < maximo; k++){
+            for(int k = 0; k < num2Array.length; k++){
                 String num = String.valueOf(listaParciales.get(k).get(j));
                 num = new StringBuilder(num).reverse().toString();
                 try{
@@ -180,11 +180,83 @@ public class MyBigInteger {
         if(("-".equals(p1) && !"-".equals(p2)) || (!"-".equals(p1) && "-".equals(p2)))
             result = "-" + result;
         
+        result = result.replaceAll("^0+(?!$)", "");
         return new MyBigInteger(result);
     }
     
     public MyBigInteger division(MyBigInteger pNumber){
         return null;
+    }
+    
+    public MyBigInteger pow(MyBigInteger pNumber){
+        MyBigInteger result = new MyBigInteger(bigNumber);
+        String p1 = bigNumber.substring(0, 1);
+        String p2 = pNumber.valueOf().substring(0, 1);
+        
+        bigNumber = bigNumber.replaceAll("-", "");
+        pNumber.setNumero(pNumber.valueOf().replaceAll("-", ""));
+        result.setNumero(result.valueOf().replaceAll("-", ""));
+        
+        while(!"1".equals(pNumber.valueOf())){
+            result = result.multiply(new MyBigInteger(bigNumber));
+            pNumber = pNumber.sub(new MyBigInteger("1"));
+        }
+        
+        if("-".equals(p2))
+            result.setNumero("1/" + result.valueOf());
+        if(("-".equals(p1)))
+            result.setNumero("-" + result.valueOf());
+        
+        return result;
+    }
+    
+    public MyBigInteger MCM(MyBigInteger pNumber){
+        return new MyBigInteger(new MyBigInteger(String.valueOf(Integer.parseInt(bigNumber) /
+                Integer.parseInt(MCD(pNumber).valueOf()))).multiply(pNumber).valueOf());
+    }
+    
+    public MyBigInteger MCD(MyBigInteger pNumber){
+        MyBigInteger result = new MyBigInteger(bigNumber);
+        if(result.valueOf().compareTo(pNumber.valueOf()) <  0)
+            return MCD_aux(result, pNumber);
+        else
+            return MCD_aux(pNumber, result);
+    }
+    
+    public MyBigInteger MCD_aux(MyBigInteger pNumber1, MyBigInteger pNumber2){
+        if("0".equals(pNumber2.valueOf()))
+            return pNumber1;
+        else
+            return MCD_aux(pNumber2, new MyBigInteger(String.valueOf(Integer.parseInt(pNumber1.valueOf()) % Integer.valueOf(pNumber2.valueOf()))));
+    }
+    
+    
+    public int mcd( int a, int b) 
+    { 
+    if ( b==0) 
+    return a; 
+    else 
+    return mcd( b, a%b); 
+    } 
+    public MyBigInteger fact(){
+        MyBigInteger backup = new MyBigInteger(bigNumber);
+        MyBigInteger result = new MyBigInteger(bigNumber);
+        
+        String p1 = bigNumber.substring(0, 1);
+        bigNumber = bigNumber.replaceAll("-", "");
+        backup.setNumero(backup.valueOf().replaceAll("-", ""));
+        result.setNumero(result.valueOf().replaceAll("-", ""));
+        
+        backup = backup.sub(new MyBigInteger("1"));
+        while(!"1".equals(backup.valueOf())){
+            result = result.multiply(backup);
+            backup = backup.sub(new MyBigInteger("1"));
+        }
+        
+        if(("-".equals(p1)))
+            result.setNumero("-" + result.valueOf());
+        
+        return result;
     }
     
     //Función de valor absoluto

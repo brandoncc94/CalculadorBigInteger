@@ -101,6 +101,15 @@ public class FrmCalculator extends javax.swing.JFrame {
         tbxResult = new javax.swing.JTextField();
         tbxOperations = new javax.swing.JTextField();
         btnAbs = new javax.swing.JButton();
+        btnPow = new javax.swing.JButton();
+        btnFibo = new javax.swing.JButton();
+        btnPhi = new javax.swing.JButton();
+        btnPrimo = new javax.swing.JButton();
+        btnMCD = new javax.swing.JButton();
+        btnMCM = new javax.swing.JButton();
+        btnFactorial = new javax.swing.JButton();
+        btnFactPrimaUnica = new javax.swing.JButton();
+        btnCantFact = new javax.swing.JButton();
 
         jButton5.setText("3");
 
@@ -405,6 +414,114 @@ public class FrmCalculator extends javax.swing.JFrame {
             }
         });
 
+        btnPow.setBackground(new java.awt.Color(69, 68, 75));
+        btnPow.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnPow.setForeground(new java.awt.Color(255, 255, 255));
+        btnPow.setText("^");
+        btnPow.setBorder(null);
+        btnPow.setFocusPainted(false);
+        btnPow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPowActionPerformed(evt);
+            }
+        });
+
+        btnFibo.setBackground(new java.awt.Color(69, 68, 75));
+        btnFibo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnFibo.setForeground(new java.awt.Color(255, 255, 255));
+        btnFibo.setText("Fibo");
+        btnFibo.setBorder(null);
+        btnFibo.setFocusPainted(false);
+        btnFibo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiboActionPerformed(evt);
+            }
+        });
+
+        btnPhi.setBackground(new java.awt.Color(69, 68, 75));
+        btnPhi.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnPhi.setForeground(new java.awt.Color(255, 255, 255));
+        btnPhi.setText("Phi");
+        btnPhi.setBorder(null);
+        btnPhi.setFocusPainted(false);
+        btnPhi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPhiActionPerformed(evt);
+            }
+        });
+
+        btnPrimo.setBackground(new java.awt.Color(69, 68, 75));
+        btnPrimo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnPrimo.setForeground(new java.awt.Color(255, 255, 255));
+        btnPrimo.setText("Primo");
+        btnPrimo.setBorder(null);
+        btnPrimo.setFocusPainted(false);
+        btnPrimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrimoActionPerformed(evt);
+            }
+        });
+
+        btnMCD.setBackground(new java.awt.Color(69, 68, 75));
+        btnMCD.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnMCD.setForeground(new java.awt.Color(255, 255, 255));
+        btnMCD.setText("MCD");
+        btnMCD.setBorder(null);
+        btnMCD.setFocusPainted(false);
+        btnMCD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMCDActionPerformed(evt);
+            }
+        });
+
+        btnMCM.setBackground(new java.awt.Color(69, 68, 75));
+        btnMCM.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnMCM.setForeground(new java.awt.Color(255, 255, 255));
+        btnMCM.setText("mcm");
+        btnMCM.setBorder(null);
+        btnMCM.setFocusPainted(false);
+        btnMCM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMCMActionPerformed(evt);
+            }
+        });
+
+        btnFactorial.setBackground(new java.awt.Color(69, 68, 75));
+        btnFactorial.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnFactorial.setForeground(new java.awt.Color(255, 255, 255));
+        btnFactorial.setText("!");
+        btnFactorial.setBorder(null);
+        btnFactorial.setFocusPainted(false);
+        btnFactorial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFactorialActionPerformed(evt);
+            }
+        });
+
+        btnFactPrimaUnica.setBackground(new java.awt.Color(69, 68, 75));
+        btnFactPrimaUnica.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnFactPrimaUnica.setForeground(new java.awt.Color(255, 255, 255));
+        btnFactPrimaUnica.setText("!prima");
+        btnFactPrimaUnica.setBorder(null);
+        btnFactPrimaUnica.setFocusPainted(false);
+        btnFactPrimaUnica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFactPrimaUnicaActionPerformed(evt);
+            }
+        });
+
+        btnCantFact.setBackground(new java.awt.Color(69, 68, 75));
+        btnCantFact.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnCantFact.setForeground(new java.awt.Color(255, 255, 255));
+        btnCantFact.setText("Factores");
+        btnCantFact.setBorder(null);
+        btnCantFact.setFocusPainted(false);
+        btnCantFact.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCantFactActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
@@ -415,7 +532,26 @@ public class FrmCalculator extends javax.swing.JFrame {
                         .addGap(15, 15, 15)
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addContainerGap(266, Short.MAX_VALUE)
+                        .addGap(34, 34, 34)
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                                .addComponent(btnCantFact, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnFibo, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                                .addComponent(btnPrimo, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnFactorial, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                                .addComponent(btnFactPrimaUnica, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnMCM, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPow, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnMCD, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(mainPanelLayout.createSequentialGroup()
                                 .addComponent(btnBackspace, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -476,33 +612,53 @@ public class FrmCalculator extends javax.swing.JFrame {
                     .addComponent(btnCleanLast, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBackspace, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSeven, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEight, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNine, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDivision, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnModule, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnFour, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnFive, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSix, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnMultiply, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAbs, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnOne, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnTwo, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnThree, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnMinus, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnPrimo, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnFactorial, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPow, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnZero, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnPoint, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(btnEqual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnFactPrimaUnica, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnMCD, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnFibo, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCantFact, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, mainPanelLayout.createSequentialGroup()
+                            .addGap(100, 100, 100)
+                            .addComponent(btnMCM, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(mainPanelLayout.createSequentialGroup()
+                            .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnSeven, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnEight, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnNine, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnDivision, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnModule, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnFour, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnFive, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnSix, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnMultiply, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnAbs, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(mainPanelLayout.createSequentialGroup()
+                                    .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btnOne, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnTwo, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnThree, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnMinus, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btnZero, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnPoint, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnEqual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
 
@@ -565,6 +721,39 @@ public class FrmCalculator extends javax.swing.JFrame {
                 break;
             case "*":
                 btnMultiply.doClick();
+                break;
+            case "/":
+                btnDivision.doClick();
+                break;
+            case "^":
+                btnPow.doClick();
+                break;
+            case "!":
+                btnFactorial.doClick();
+                break;
+            case "MCD":
+                btnMCD.doClick();
+                break;
+            case "MCM":
+                btnMCM.doClick();
+                break;
+            case "mod":
+                btnModule.doClick();
+                break;
+            case "fibo":
+                btnFibo.doClick();
+                break;
+            case "primo":
+                btnPrimo.doClick();
+                break;
+            case "!primo":
+                btnFactPrimaUnica.doClick();
+                break;
+            case "factores":
+                btnCantFact.doClick();
+                break;
+            case "Phi":
+                btnPhi.doClick();
                 break;
             case "abs":
                 btnAbs.doClick();
@@ -653,6 +842,42 @@ public class FrmCalculator extends javax.swing.JFrame {
         executeOperation("/");
     }//GEN-LAST:event_btnDivisionActionPerformed
 
+    private void btnPowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPowActionPerformed
+        executeOperation("^");
+    }//GEN-LAST:event_btnPowActionPerformed
+
+    private void btnFiboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiboActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFiboActionPerformed
+
+    private void btnPhiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPhiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPhiActionPerformed
+
+    private void btnPrimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPrimoActionPerformed
+
+    private void btnMCDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMCDActionPerformed
+        executeOperation("MCD");
+    }//GEN-LAST:event_btnMCDActionPerformed
+
+    private void btnMCMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMCMActionPerformed
+        executeOperation("MCM");
+    }//GEN-LAST:event_btnMCMActionPerformed
+
+    private void btnFactorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFactorialActionPerformed
+        executeOperation("!");
+    }//GEN-LAST:event_btnFactorialActionPerformed
+
+    private void btnFactPrimaUnicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFactPrimaUnicaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFactPrimaUnicaActionPerformed
+
+    private void btnCantFactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCantFactActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCantFactActionPerformed
+
     public void sendResult(String pNumber){
         //Llamamos al controlador para procesar el resultado
         accessFlag = false;
@@ -669,7 +894,7 @@ public class FrmCalculator extends javax.swing.JFrame {
             accessFlag = true;
             minusFlag = true;
             controller.setLastOperation(pType);
-            if(tbxOperations.getText().length() != 0 || pType.equals("abs")){
+            if(tbxOperations.getText().length() != 0 || pType.equals("abs") || pType.equals("!")){
                 tbxOperations.setText(tbxOperations.getText() + tbxResult.getText() + " | " +  controller.getLastOperation() + " | ");
                 controller.sendOperationMessage();
             }else{
@@ -725,20 +950,29 @@ public class FrmCalculator extends javax.swing.JFrame {
     private javax.swing.JButton btnAbs;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBackspace;
+    private javax.swing.JButton btnCantFact;
     private javax.swing.JButton btnClean;
     private javax.swing.JButton btnCleanLast;
     private javax.swing.JButton btnDivision;
     private javax.swing.JButton btnEight;
     private javax.swing.JButton btnEqual;
+    private javax.swing.JButton btnFactPrimaUnica;
+    private javax.swing.JButton btnFactorial;
+    private javax.swing.JButton btnFibo;
     private javax.swing.JButton btnFive;
     private javax.swing.JButton btnFour;
+    private javax.swing.JButton btnMCD;
+    private javax.swing.JButton btnMCM;
     private javax.swing.JButton btnMinus;
     private javax.swing.JButton btnModule;
     private javax.swing.JButton btnMultiply;
     private javax.swing.JButton btnNine;
     private javax.swing.JButton btnOne;
     private javax.swing.JButton btnPasteAction;
+    private javax.swing.JButton btnPhi;
     private javax.swing.JButton btnPoint;
+    private javax.swing.JButton btnPow;
+    private javax.swing.JButton btnPrimo;
     private javax.swing.JButton btnSeven;
     private javax.swing.JButton btnSix;
     private javax.swing.JButton btnThree;

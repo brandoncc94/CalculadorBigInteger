@@ -61,6 +61,18 @@ public class DataInput {
                 case "/":
                     result = pNumber1.division(pNumber2);
                     break;
+                case "^":
+                    result = pNumber1.pow(pNumber2);
+                    break;
+                case "MCD":
+                    result = pNumber1.MCD(pNumber2);
+                    break;
+                case "MCM":
+                    result = pNumber1.MCM(pNumber2);
+                    break;
+                case "!":
+                    result = pNumber2.fact();
+                    break;
                 case "abs":
                     result = pNumber2.abs();
                     break;
@@ -69,7 +81,6 @@ public class DataInput {
         }catch(Exception e){
             System.out.println("Error " + e.getMessage());
         }
-        
         return result;
     }
     
@@ -78,6 +89,7 @@ public class DataInput {
         MyBigInteger number2 = new MyBigInteger(this.currentNumber);
         MyBigInteger result = applyResult(number1, number2, pType);
         this.total = result.valueOf();
+        this.total = this.total.replaceAll("^0+(?!$)", "");
         this.currentNumber = "";
     }
 }
