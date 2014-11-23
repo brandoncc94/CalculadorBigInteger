@@ -363,34 +363,75 @@ public class MyBigInteger {
             return MCD_aux(pNumber2, pNumber1.division(pNumber2, true));
     }
     
+    //Función de factorización prima única
+    public MyBigInteger factPrimaUnica(){
+        MyBigInteger number = new MyBigInteger(bigNumber).abs();
+        MyBigInteger result = new MyBigInteger("");
+        MyBigInteger cont = new MyBigInteger("2");
+        
+        MyBigInteger mod;
+        while(!number.valueOf().equals("1")){
+            mod = number.division(cont, true);
+            if(isPrimo(cont) && mod.valueOf().equals("0")){
+                result.setNumero(result.valueOf() + " * " + cont.valueOf());
+                number = number.division(cont, false);
+            }
+            else
+                cont = cont.add(new MyBigInteger("1"));
+        }
+        
+        /*String[] palabras = result.valueOf().trim().split(" ");
+        String resp = "", total = "";
+        int c = 1;
+        if(palabras.length > 0){
+            for (String palabra : palabras) {
+                
+                    System.out.println(c);
+                    System.out.println(resp);
+                    System.out.println(palabra);
+                    System.out.println("asdasd");
+                if(c == 1)
+                    resp = palabra;
+                if (resp.equals(palabra.trim()))
+                    c++;
+                else{
+                    if(c == 1)
+                        total += " * " + palabra + "^ 1";
+                    else{
+                        total += " * " + resp + "^" + String.valueOf(c - 1);
+                        c = 1;                        
+                    }
+                }                    
+            }
+            total += " * " + resp + "^" + String.valueOf(c - 1);
+        }
+        
+        result.setNumero(total.replaceFirst("\\*", ""));*/
+        result.setNumero(result.valueOf().replaceFirst("\\*", ""));
+        return result;
+    }
+    
     //Función para saber si un número es primo o no
-    public boolean isPrimo(){
-        MyBigInteger number = new MyBigInteger(bigNumber);
-        String p1 = number.valueOf().substring(0, 1);
-        if("-".equals(p1))
-            return false;
+    public boolean isPrimo(MyBigInteger pNumber){
+        MyBigInteger number = new MyBigInteger(pNumber.valueOf()).abs();
         
         MyBigInteger cont = new MyBigInteger("2");
 
         if (number.valueOf().equals("2"))
             return true;   
         
-        MyBigInteger raiz = number.division(new MyBigInteger("2"), false);
-        MyBigInteger backup;
+        MyBigInteger raiz = number.division(cont, false);
+        MyBigInteger backup = new MyBigInteger(raiz.valueOf());
         
-        do
-        {
+        while(!backup.sub(raiz).valueOf().equals("0")){
             backup = new MyBigInteger(raiz.valueOf());
-            raiz.setNumero(backup.add(number.division(backup, false)).division(new MyBigInteger("2"), false).valueOf());
-        }
-        while(!backup.sub(raiz).valueOf().equals("0"));
-        
-        System.out.println("Raíz: " + raiz.valueOf());
+            raiz.setNumero(backup.add(number.division(backup, false)).division(cont, false).valueOf());
+        }        
         
         while (cont.valueOf().compareTo(raiz.valueOf()) <= 0){
             if (number.division(cont, true).valueOf().equals("0")) 
                 return false;
-            cont.add(new MyBigInteger("1"));
+            cont = cont.add(new MyBigInteger("1"));
         }
         return true;
     }
