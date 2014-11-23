@@ -851,11 +851,11 @@ public class FrmCalculator extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPowActionPerformed
 
     private void btnFiboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiboActionPerformed
-        // TODO add your handling code here:
+        executeOperation("fibo");
     }//GEN-LAST:event_btnFiboActionPerformed
 
     private void btnPhiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPhiActionPerformed
-        // TODO add your handling code here:
+        executeOperation("phi");
     }//GEN-LAST:event_btnPhiActionPerformed
 
     private void btnGBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGBActionPerformed
@@ -902,7 +902,8 @@ public class FrmCalculator extends javax.swing.JFrame {
             accessFlag = true;
             minusFlag = true;
             controller.setLastOperation(pType);
-            if(tbxOperations.getText().length() != 0 || pType.equals("abs") || pType.equals("!") || pType.equals("!prima")){
+            if(tbxOperations.getText().length() != 0 || pType.equals("abs") || pType.equals("!") 
+                    || pType.equals("!prima") || pType.equals("fibo") || pType.equals("phi") ){
                 tbxOperations.setText(tbxOperations.getText() + tbxResult.getText() + " | " +  controller.getLastOperation() + " | ");
                 controller.sendOperationMessage();
             }else{

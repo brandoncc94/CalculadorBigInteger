@@ -363,6 +363,53 @@ public class MyBigInteger {
             return MCD_aux(pNumber2, pNumber1.division(pNumber2, true));
     }
     
+    //Función de fibonacci
+    public MyBigInteger fibo(){
+        if(bigNumber.equals("0")){
+            return this;
+        }
+        if(!higher("0")){
+            return null;
+        }
+        MyBigInteger one =  new MyBigInteger("1");
+        MyBigInteger I = new MyBigInteger("1");
+        MyBigInteger P = new MyBigInteger("0");
+        MyBigInteger U = new MyBigInteger("1");
+        while(!I.higher(bigNumber)){
+            I = I.add(one);
+            MyBigInteger tmp = P.add(U);
+            P=U;
+            U=tmp;
+        }
+        return U;
+    }
+    
+    //Funcion de phi
+    public MyBigInteger phi(){
+        if("1".equals(bigNumber)){
+            return this;
+        }
+        MyBigInteger n = new MyBigInteger(bigNumber);
+        MyBigInteger tot = new MyBigInteger(bigNumber);
+        MyBigInteger p = new MyBigInteger("2");
+        MyBigInteger one = new MyBigInteger("1");
+        while(!new MyBigInteger(p.valueOf()).multiply(new MyBigInteger(p.valueOf())).higher(n.valueOf()) 
+                || new MyBigInteger(p.valueOf()).multiply(new MyBigInteger(p.valueOf())).valueOf().equals(n.valueOf())){
+            if(n.division(p, true).valueOf().equals("0")){
+                tot = tot.division(p,false);
+                tot = tot.multiply(p.sub(one));
+                while(n.division(p, true).valueOf().equals("0"))
+                    n = n.division(p,false);
+            }
+            p = p.add(one);
+        }
+        if(!one.higher(n.valueOf())){
+            tot = tot.division(n,false);
+            tot = tot.multiply(n.sub(one));
+        }
+        return tot;
+    }
+
     //Función de factorización prima única
     public MyBigInteger factPrimaUnica(){
         MyBigInteger number = new MyBigInteger(bigNumber).abs();
