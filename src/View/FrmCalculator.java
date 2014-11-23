@@ -326,6 +326,11 @@ public class FrmCalculator extends javax.swing.JFrame {
         btnModule.setText("mod");
         btnModule.setBorder(null);
         btnModule.setFocusPainted(false);
+        btnModule.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModuleActionPerformed(evt);
+            }
+        });
 
         btnClean.setBackground(new java.awt.Color(206, 79, 29));
         btnClean.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -349,7 +354,6 @@ public class FrmCalculator extends javax.swing.JFrame {
         btnBackspace.setBackground(new java.awt.Color(227, 90, 90));
         btnBackspace.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnBackspace.setForeground(new java.awt.Color(255, 255, 255));
-        btnBackspace.setIcon(new javax.swing.ImageIcon("/home/brandoncc94/deleteArrow.png")); // NOI18N
         btnBackspace.setBorder(null);
         btnBackspace.setFocusPainted(false);
         btnBackspace.addActionListener(new java.awt.event.ActionListener() {
@@ -566,6 +570,12 @@ public class FrmCalculator extends javax.swing.JFrame {
             case "*":
                 btnMultiply.doClick();
                 break;
+            case "/":
+                btnDivision.doClick();
+                break;
+            case "mod":
+                btnDivision.doClick();
+                break;
             case "abs":
                 btnAbs.doClick();
                 break;                
@@ -652,6 +662,10 @@ public class FrmCalculator extends javax.swing.JFrame {
     private void btnDivisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDivisionActionPerformed
         executeOperation("/");
     }//GEN-LAST:event_btnDivisionActionPerformed
+
+    private void btnModuleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModuleActionPerformed
+        executeOperation("mod");
+    }//GEN-LAST:event_btnModuleActionPerformed
 
     public void sendResult(String pNumber){
         //Llamamos al controlador para procesar el resultado

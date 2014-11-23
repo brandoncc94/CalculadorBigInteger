@@ -59,7 +59,10 @@ public class DataInput {
                     result = pNumber1.multiply(pNumber2);
                     break;
                 case "/":
-                    result = pNumber1.division(pNumber2);
+                    result = pNumber1.division(pNumber2,false);
+                    break;
+                case "mod":
+                    result = pNumber1.division(pNumber2,true);
                     break;
                 case "abs":
                     result = pNumber2.abs();
