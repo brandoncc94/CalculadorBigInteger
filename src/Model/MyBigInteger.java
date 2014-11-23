@@ -397,7 +397,6 @@ public class MyBigInteger {
     
     //Obtener el factorial de un número
     public MyBigInteger fact(){
-        System.out.println(isPrimo());
         //Respaldamos el número para mantener la inmutabilidad
         MyBigInteger backup = new MyBigInteger(bigNumber);
         MyBigInteger result = new MyBigInteger(bigNumber);
