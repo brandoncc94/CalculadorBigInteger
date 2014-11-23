@@ -112,38 +112,51 @@ public class MyBigInteger {
     
     //Función de multiplicar a medias
     public MyBigInteger multiply(MyBigInteger pNumber){
+        int resto = 0;
         String result = "";
+        
+        //Reespaldamos el primer elemento a ver si es un -, para agregarlo al final
         String p1 = bigNumber.substring(0, 1);
         String p2 = pNumber.valueOf().substring(0, 1);
         
-        bigNumber = bigNumber.replaceAll("-", "");
-        pNumber.setNumero(pNumber.valueOf().replaceAll("-", ""));
-         
-        int resto = 0;
-        bigNumber = new StringBuilder(bigNumber).reverse().toString();
-        String pNumber2 = new StringBuilder(pNumber.valueOf()).reverse().toString();
+        //Mantenemos la inmutabilidad, por lo que se crea un objeto nuevo
+        MyBigInteger bigNumber1 = new MyBigInteger(bigNumber);
+        MyBigInteger bigNumber2 = new MyBigInteger(pNumber.valueOf());
+        
+        //Quitamos el negativo
+        bigNumber2.setNumero(bigNumber2.valueOf().replaceAll("-", ""));
+        bigNumber1.setNumero(bigNumber1.valueOf().replaceAll("-", ""));
+        
+        bigNumber1.setNumero(new StringBuilder(bigNumber1.valueOf()).reverse().toString());
+        bigNumber2.setNumero(new StringBuilder(bigNumber2.valueOf()).reverse().toString());
             
-        // Convertimos el string a un arreglo de char's
-        char[] num1Array = bigNumber.toCharArray();
-        char[] num2Array = pNumber2.toCharArray();
+        // Convertimos el string de los números a un arreglo de char's
+        char[] num1Array = bigNumber1.valueOf().toCharArray();
+        char[] num2Array = bigNumber2.valueOf().toCharArray();
+        
+        //Creamos arreglos para mantener los números parciles
         ArrayList<Integer> parciales = new ArrayList<>();
         ArrayList<ArrayList<Integer>> listaParciales = new ArrayList<>();
+        
+        //Arreglos para guardar los números más y menos significativos
         ArrayList<Integer> MSD = new ArrayList<>();
         ArrayList<Integer> LSD = new ArrayList<>();
+        
         int subTotal, cont;
         
+        //Agrupamos en "cajas" los resultados parciales y los vamos guardando
+        //en la lista de parciales
         for(int k = 0; k < num2Array.length; k++){
             cont = k;
             for(int n = 0; n < ((num1Array.length + num2Array.length) - 1); n++)
                 parciales.add(0);
             
             for(int j = 0; j < ((num1Array.length + num2Array.length) - 1); j++){
-                try{
+                if(j - k < num1Array.length){
                     if(cont == 0)
                         parciales.set(j, Character.getNumericValue(num1Array[j - k]) * Character.getNumericValue(num2Array[k]));
                     else
                         cont--;
-                }catch(Exception e){ 
                 }
             }
             Collections.reverse(parciales);
@@ -151,27 +164,31 @@ public class MyBigInteger {
             parciales = new ArrayList<>();
         }
         
+        //Inicializamos los arreglos del MSD y LSD
         for(int n = 0; n < (num1Array.length + num2Array.length); n++){
             MSD.add(0);
             LSD.add(0);
         }
         
         int subMSD = 0, subLSD = 0;
+        
+        //Finalmente se procede a sumar las columnas de los números y acomodarlos
+        //en su MSD, o LSD respectivamente
         for(int j = 0; j < listaParciales.get(0).size(); j++){
             subMSD = 0;
             subLSD = 0;
             for(int k = 0; k < num2Array.length; k++){
                 String num = String.valueOf(listaParciales.get(k).get(j));
                 num = new StringBuilder(num).reverse().toString();
-                try{
+                if(num.length() > 1)
                     subMSD += Character.getNumericValue(num.charAt(1));
-                }catch(Exception e){ }
-                
                 subLSD += Character.getNumericValue(num.charAt(0));
             }
             MSD.set(j, subMSD);
             LSD.set(j + 1, subLSD);
         }
+        
+        //Una vez listos los arreglos MSD y LSD se procede a sumar y retornar la multiplicación
         for(int i = MSD.size() - 1; i >= 0; i--){
             subTotal = MSD.get(i) + LSD.get(i) + resto;
             if(subTotal <= 9){
@@ -183,10 +200,13 @@ public class MyBigInteger {
             }
         }
         
+        //Quitar ceros al inicio
+        result = result.replaceAll("^0+(?!$)", "");
+        
+        //Si el número era negativo se le coloca el menos al inicio
         if(("-".equals(p1) && !"-".equals(p2)) || (!"-".equals(p1) && "-".equals(p2)))
             result = "-" + result;
         
-        result = result.replaceAll("^0+(?!$)", "");
         return new MyBigInteger(result);
     }
     
@@ -260,41 +280,55 @@ public class MyBigInteger {
         }
     }
     
+    //Potencia de un número
     public MyBigInteger pow(MyBigInteger pNumber){
+        //Matenemos la integridad de los bigInteger, inmutabilidad
         MyBigInteger result = new MyBigInteger(bigNumber);
-        String p1 = bigNumber.substring(0, 1);
-        String p2 = pNumber.valueOf().substring(0, 1);
+        MyBigInteger cont = new MyBigInteger(pNumber.valueOf());
         
-        bigNumber = bigNumber.replaceAll("-", "");
-        pNumber.setNumero(pNumber.valueOf().replaceAll("-", ""));
+        //Guardamos el primer carácter para verificar si es un - al final
+        String p1 = result.valueOf().substring(0, 1);
+        String p2 = cont.valueOf().substring(0, 1);
+        
+        //Reemplazamos los - y los quitamos, para así trabajar con los números
         result.setNumero(result.valueOf().replaceAll("-", ""));
+        cont.setNumero(cont.valueOf().replaceAll("-", ""));
         
-        while(!"1".equals(pNumber.valueOf())){
-            result = result.multiply(new MyBigInteger(bigNumber));
-            pNumber = pNumber.sub(new MyBigInteger("1"));
+        MyBigInteger backup = new MyBigInteger(result.valueOf());
+        
+        //Mientras que sea distinto de uno, elevamos
+        while(!"1".equals(cont.valueOf())){
+            //Multiplicamos el resultado
+            result = result.multiply(backup);
+            cont = cont.sub(new MyBigInteger("1"));
         }
-        
+        //Si el número a elevar es negativo, entonces se procede al recíproco
         if("-".equals(p2))
             result.setNumero("1/" + result.valueOf());
+        //Sí el primer número tiene un negativo se le restaura de nuevo al resultado final
         if(("-".equals(p1)))
             result.setNumero("-" + result.valueOf());
         
+        //Retornamos el BigInteger nuevo con el resultado
         return result;
     }
     
+    //Obtener el mímimo común mútiplo
     public MyBigInteger MCM(MyBigInteger pNumber){
         return new MyBigInteger(new MyBigInteger(bigNumber).division(MCD(pNumber), 
                         false).multiply(pNumber).valueOf());
     }
     
+    //Obtener el máximo común divisor
     public MyBigInteger MCD(MyBigInteger pNumber){
         MyBigInteger result = new MyBigInteger(bigNumber);
         if(result.valueOf().compareTo(pNumber.valueOf()) <  0)
-            return MCD_aux(result, pNumber);
+            return MCD_aux(result, new MyBigInteger(pNumber.valueOf()));
         else
-            return MCD_aux(pNumber, result);
+            return MCD_aux(new MyBigInteger(pNumber.valueOf()), result);
     }
     
+    //Función MCD auxiliar recursiva
     public MyBigInteger MCD_aux(MyBigInteger pNumber1, MyBigInteger pNumber2){
         if("0".equals(pNumber2.valueOf()))
             return pNumber1;
@@ -302,38 +336,71 @@ public class MyBigInteger {
             return MCD_aux(pNumber2, pNumber1.division(pNumber2, true));
     }
     
+    //Función para saber si un número es primo o no
+    public boolean isPrimo(){
+        MyBigInteger number = new MyBigInteger(bigNumber);
+        String p1 = number.valueOf().substring(0, 1);
+        if("-".equals(p1))
+            return false;
+        
+        MyBigInteger cont = new MyBigInteger("2");
+
+        if (number.valueOf().equals("2"))
+            return true;   
+        
+        MyBigInteger raiz = number.division(new MyBigInteger("2"), false);
+        MyBigInteger backup;
+        
+        do
+        {
+            backup = new MyBigInteger(raiz.valueOf());
+            raiz.setNumero(backup.add(number.division(backup, false)).division(new MyBigInteger("2"), false).valueOf());
+        }
+        while(!backup.sub(raiz).valueOf().equals("0"));
+        
+        System.out.println("Raíz: " + raiz.valueOf());
+        
+        while (cont.valueOf().compareTo(raiz.valueOf()) <= 0){
+            if (number.division(cont, true).valueOf().equals("0")) 
+                return false;
+            cont.add(new MyBigInteger("1"));
+        }
+        return true;
+    }
+    
+    //Obtener el factorial de un número
     public MyBigInteger fact(){
+        System.out.println(isPrimo());
+        //Respaldamos el número para mantener la inmutabilidad
         MyBigInteger backup = new MyBigInteger(bigNumber);
         MyBigInteger result = new MyBigInteger(bigNumber);
         
+        //Guardamos el primer carácter para verficiar al final si hay que agregarle un -
         String p1 = bigNumber.substring(0, 1);
-        bigNumber = bigNumber.replaceAll("-", "");
         backup.setNumero(backup.valueOf().replaceAll("-", ""));
         result.setNumero(result.valueOf().replaceAll("-", ""));
         
+        //Le restamos uno al número de backup
         backup = backup.sub(new MyBigInteger("1"));
+        
+        //Mientras sea diferente de 1, multiplicamos el resultado por el resultado - 1 (backup)
         while(!"1".equals(backup.valueOf())){
             result = result.multiply(backup);
             backup = backup.sub(new MyBigInteger("1"));
         }
         
+        //Agregamos un menos de ser necesario
         if(("-".equals(p1)))
             result.setNumero("-" + result.valueOf());
         
+        //Retornamos el nuevo número
         return result;
     }
     
     //Función de valor absoluto
     public MyBigInteger abs(){
-        String result = "";
-        char[] num1Array = this.bigNumber.toCharArray();
-        if(num1Array[0] == '-')
-            num1Array = Arrays.copyOfRange(num1Array, 1, num1Array.length);
-            
-        for(int i = num1Array.length - 1; i >= 0; i--)
-            result = num1Array[i] - '0' + result;
-        
-        return new MyBigInteger(result);
+        String backup = bigNumber;
+        return new MyBigInteger(backup.replaceAll("-", ""));
     }
     
     public boolean higher(String pNumber2){

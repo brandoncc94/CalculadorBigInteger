@@ -105,7 +105,7 @@ public class FrmCalculator extends javax.swing.JFrame {
         btnPow = new javax.swing.JButton();
         btnFibo = new javax.swing.JButton();
         btnPhi = new javax.swing.JButton();
-        btnPrimo = new javax.swing.JButton();
+        btnGB = new javax.swing.JButton();
         btnMCD = new javax.swing.JButton();
         btnMCM = new javax.swing.JButton();
         btnFactorial = new javax.swing.JButton();
@@ -456,15 +456,15 @@ public class FrmCalculator extends javax.swing.JFrame {
             }
         });
 
-        btnPrimo.setBackground(new java.awt.Color(69, 68, 75));
-        btnPrimo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnPrimo.setForeground(new java.awt.Color(255, 255, 255));
-        btnPrimo.setText("Primo");
-        btnPrimo.setBorder(null);
-        btnPrimo.setFocusPainted(false);
-        btnPrimo.addActionListener(new java.awt.event.ActionListener() {
+        btnGB.setBackground(new java.awt.Color(69, 68, 75));
+        btnGB.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnGB.setForeground(new java.awt.Color(255, 255, 255));
+        btnGB.setText("GB");
+        btnGB.setBorder(null);
+        btnGB.setFocusPainted(false);
+        btnGB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPrimoActionPerformed(evt);
+                btnGBActionPerformed(evt);
             }
         });
 
@@ -545,7 +545,7 @@ public class FrmCalculator extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnFibo, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                                .addComponent(btnPrimo, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnGB, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnFactorial, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
@@ -652,7 +652,7 @@ public class FrmCalculator extends javax.swing.JFrame {
                             .addComponent(btnEqual, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnPrimo, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnGB, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnFactorial, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnPow, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -749,9 +749,6 @@ public class FrmCalculator extends javax.swing.JFrame {
                 break;
             case "fibo":
                 btnFibo.doClick();
-                break;
-            case "primo":
-                btnPrimo.doClick();
                 break;
             case "!primo":
                 btnFactPrimaUnica.doClick();
@@ -861,9 +858,9 @@ public class FrmCalculator extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnPhiActionPerformed
 
-    private void btnPrimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnPrimoActionPerformed
+    private void btnGBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGBActionPerformed
+        executeOperation("primo");
+    }//GEN-LAST:event_btnGBActionPerformed
 
     private void btnMCDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMCDActionPerformed
         executeOperation("MCD");
@@ -972,6 +969,7 @@ public class FrmCalculator extends javax.swing.JFrame {
     private javax.swing.JButton btnFibo;
     private javax.swing.JButton btnFive;
     private javax.swing.JButton btnFour;
+    private javax.swing.JButton btnGB;
     private javax.swing.JButton btnMCD;
     private javax.swing.JButton btnMCM;
     private javax.swing.JButton btnMinus;
@@ -983,7 +981,6 @@ public class FrmCalculator extends javax.swing.JFrame {
     private javax.swing.JButton btnPhi;
     private javax.swing.JButton btnPoint;
     private javax.swing.JButton btnPow;
-    private javax.swing.JButton btnPrimo;
     private javax.swing.JButton btnSeven;
     private javax.swing.JButton btnSix;
     private javax.swing.JButton btnThree;
