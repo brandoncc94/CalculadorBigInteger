@@ -65,6 +65,12 @@ public class MyBigInteger {
         String p1 = bigNumber.substring(0, 1);
         String p2 = pNumber.valueOf().substring(0, 1);
         
+        if(pNumber.higher(bigNumber)){
+            MyBigInteger nc9 = this.complement9(pNumber.valueOf().length());
+            String result = nc9.add(pNumber).valueOf();
+            return new MyBigInteger("-"+result.substring(1));
+        }
+        
         if(("-".equals(p1) && !"-".equals(p2))
                 || (!"-".equals(p1) && "-".equals(p2))){
             if("-".equals(p2))
@@ -184,8 +190,74 @@ public class MyBigInteger {
         return new MyBigInteger(result);
     }
     
-    public MyBigInteger division(MyBigInteger pNumber){
-        return null;
+    public MyBigInteger division(MyBigInteger pNumber,boolean pFlag){
+        boolean flag1 = false;
+        boolean flag2 = false;
+        String result = "";
+        String p1 = bigNumber.substring(0, 1);
+        String p2 = pNumber.valueOf().substring(0, 1);
+        
+        MyBigInteger dividendo = new MyBigInteger(bigNumber);
+        MyBigInteger divisor = new MyBigInteger(pNumber.valueOf());
+        if(pNumber.valueOf().equals("0")){
+            System.out.println("Division by zero");
+            return null;
+        }
+        if("-".equals(p2)){
+            flag1=true;
+            divisor = divisor.abs();
+        }
+        if("-".equals(p1)){
+            flag2=true;
+            dividendo = dividendo.abs();
+        }
+        MyBigInteger q = new MyBigInteger("0");
+        MyBigInteger r = new MyBigInteger(dividendo.valueOf());
+        while(!divisor.higher(r.valueOf())){
+            q = q.add(new MyBigInteger("1"));
+            r = r.sub(divisor);
+        }
+        if(pFlag){
+            System.out.println("enter");
+            if("0".equals(r.valueOf())){
+                return r;
+            }
+            if(flag1){
+                if(flag2){
+                    return divisor.sub(r);
+                }
+                else{
+                    return r;
+                }
+            }
+            if(flag2){
+                return divisor.sub(r);
+            }
+            return r;
+        }
+        else{
+            if(!flag1 && !flag2){
+                return q;
+            }
+            if(flag1){
+                if(flag2){
+                    if("0".equals(r.valueOf())){
+                        return q;
+                    }else{
+                        return new MyBigInteger("-"+q.valueOf()).sub(new MyBigInteger("-1")).abs();
+                    }
+                }
+                return new MyBigInteger("-"+q.valueOf());
+            }
+            else{
+                if("0".equals(r.valueOf())){
+                    return new MyBigInteger("-"+q.valueOf());
+                }else{
+                    return new MyBigInteger("-"+q.valueOf()).sub(new MyBigInteger("-1"));
+                }
+            }
+            
+        }
     }
     
     public MyBigInteger pow(MyBigInteger pNumber){
@@ -211,8 +283,8 @@ public class MyBigInteger {
     }
     
     public MyBigInteger MCM(MyBigInteger pNumber){
-        return new MyBigInteger(new MyBigInteger(String.valueOf(Integer.parseInt(bigNumber) /
-                Integer.parseInt(MCD(pNumber).valueOf()))).multiply(pNumber).valueOf());
+        return new MyBigInteger(new MyBigInteger(bigNumber).division(MCD(pNumber), 
+                        false).multiply(pNumber).valueOf());
     }
     
     public MyBigInteger MCD(MyBigInteger pNumber){
@@ -227,17 +299,9 @@ public class MyBigInteger {
         if("0".equals(pNumber2.valueOf()))
             return pNumber1;
         else
-            return MCD_aux(pNumber2, new MyBigInteger(String.valueOf(Integer.parseInt(pNumber1.valueOf()) % Integer.valueOf(pNumber2.valueOf()))));
+            return MCD_aux(pNumber2, pNumber1.division(pNumber2, true));
     }
     
-    
-    public int mcd( int a, int b) 
-    { 
-    if ( b==0) 
-    return a; 
-    else 
-    return mcd( b, a%b); 
-    } 
     public MyBigInteger fact(){
         MyBigInteger backup = new MyBigInteger(bigNumber);
         MyBigInteger result = new MyBigInteger(bigNumber);
@@ -270,6 +334,51 @@ public class MyBigInteger {
             result = num1Array[i] - '0' + result;
         
         return new MyBigInteger(result);
+    }
+    
+    public boolean higher(String pNumber2){
+        int num1Len = bigNumber.length();
+        int num2Len = pNumber2.length();
+        int i = 0;
+        if("-".equals(bigNumber.substring(0, 1))){
+            if(!"-".equals(pNumber2.substring(0,1))){
+                return false;
+            }
+            else{
+                i=1;
+            }
+        }
+        if("-".equals(pNumber2.substring(0,1))){
+            return true;
+        }
+        if(num1Len!=num2Len){
+            if(num1Len>num2Len)
+                return true;
+            else
+                return false;
+        }
+        while (i<num1Len) {
+            if(Integer.parseInt(bigNumber.substring(i,i+1)) < Integer.parseInt(pNumber2.substring(i,i+1)))
+                return false;
+            if(Integer.parseInt(bigNumber.substring(i,i+1)) > Integer.parseInt(pNumber2.substring(i,i+1)))
+                return true;
+            i++;
+        }
+        return false;
+        
+    }
+    
+    public MyBigInteger complement9(int c){
+        int i=0;
+        String numC9="1";
+        String zero = "0";
+        while(i<c){
+            numC9+=zero;
+            i++;
+        }
+        MyBigInteger com9Add= new MyBigInteger(numC9);
+        MyBigInteger numberC9 = com9Add.sub(this);
+        return numberC9;
     }
     
     public ArrayList<String> addZeros(String pNumber2){

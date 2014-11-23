@@ -1,6 +1,7 @@
 
 package bigintegercalculator;
 
+import Model.MyBigInteger;
 import View.FrmCalculator;
 
 public class BigIntegerCalculator {
