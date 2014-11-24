@@ -389,10 +389,13 @@ public class MyBigInteger {
         if("1".equals(bigNumber)){
             return this;
         }
+        MyBigInteger one = new MyBigInteger("1");
+        if(isPrimo(this)){
+            return new MyBigInteger(bigNumber).sub(one);
+        }
         MyBigInteger n = new MyBigInteger(bigNumber);
         MyBigInteger tot = new MyBigInteger(bigNumber);
         MyBigInteger p = new MyBigInteger("2");
-        MyBigInteger one = new MyBigInteger("1");
         while(!new MyBigInteger(p.valueOf()).multiply(new MyBigInteger(p.valueOf())).higher(n.valueOf()) 
                 || new MyBigInteger(p.valueOf()).multiply(new MyBigInteger(p.valueOf())).valueOf().equals(n.valueOf())){
             if(n.division(p, true).valueOf().equals("0")){
@@ -466,6 +469,8 @@ public class MyBigInteger {
 
         if (number.valueOf().equals("2"))
             return true;   
+        if (number.division(new MyBigInteger("2"),true).valueOf().equals("0"))
+            return false;   
         
         MyBigInteger raiz = number.division(cont, false);
         MyBigInteger backup = new MyBigInteger(raiz.valueOf());
@@ -482,6 +487,30 @@ public class MyBigInteger {
         }
         return true;
     }
+    /*
+    MyBigInteger number = new MyBigInteger(pNumber.valueOf()).abs();
+        
+        MyBigInteger cont = new MyBigInteger("5");
+        MyBigInteger w = new MyBigInteger("2");
+
+        if (number.valueOf().equals("2") || number.valueOf().equals("3"))
+                return true;
+        if (number.division(new MyBigInteger("2"), true).valueOf().equals("0")
+                || number.division(new MyBigInteger("3"), true).valueOf().equals("0"))
+            return false;   
+        
+        while(!new MyBigInteger(cont.valueOf()).multiply(new MyBigInteger(cont.valueOf())).higher(number.valueOf())){
+            System.out.println("i*i = " + new MyBigInteger(cont.valueOf()).multiply(new MyBigInteger(cont.valueOf())).valueOf());
+            System.out.println("i = " + cont.valueOf());
+            if(number.division(cont, true).valueOf().equals("0")){
+                return false;
+            }
+            cont = cont.add(w);
+            w = new MyBigInteger("6").sub(w);
+            System.out.println("w = "+  w.valueOf());
+        }
+        return true;
+    */
     
     //Obtener el factorial de un número
     public MyBigInteger fact(){
