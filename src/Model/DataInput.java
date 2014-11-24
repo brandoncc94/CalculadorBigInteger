@@ -84,6 +84,9 @@ public class DataInput {
                 case "factores":
                     result = pNumber2.getFactors();
                     break;
+                case "goldbach":
+                    result = pNumber2.getGoldBach();
+                    break;
                 case "fibo":
                     result = pNumber2.fibo();
                     break;
