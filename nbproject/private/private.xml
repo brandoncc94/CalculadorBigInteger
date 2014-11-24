@@ -3,11 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/juankar199400/CalculadoraBigInteger/src/Controller/MainController.java</file>
-            <file>file:/home/juankar199400/CalculadoraBigInteger/src/View/FrmCalculator.java</file>
-            <file>file:/home/juankar199400/CalculadoraBigInteger/src/bigintegercalculator/BigIntegerCalculator.java</file>
-            <file>file:/home/juankar199400/CalculadoraBigInteger/src/Model/MyBigInteger.java</file>
-            <file>file:/home/juankar199400/CalculadoraBigInteger/src/Model/DataInput.java</file>
+            <file>file:/home/brandoncc94/NetBeansProjects/CalculadoraBigInteger/src/View/FrmCalculator.java</file>
+            <file>file:/home/brandoncc94/NetBeansProjects/CalculadoraBigInteger/src/Controller/MainController.java</file>
+            <file>file:/home/brandoncc94/NetBeansProjects/CalculadoraBigInteger/src/Model/DataInput.java</file>
+            <file>file:/home/brandoncc94/NetBeansProjects/CalculadoraBigInteger/src/Model/MyBigInteger.java</file>
         </group>
     </open-files>
 </project-private>
