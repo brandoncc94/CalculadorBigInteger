@@ -79,7 +79,7 @@ public class DataInput {
                     result = pNumber2.fact();
                     break;
                 case "!prima":
-                    result = pNumber2.factPrimaUnica();
+                    result = pNumber2.getPrimeFact();
                     break;
                 case "fibo":
                     result = pNumber2.fibo();

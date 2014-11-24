@@ -74,6 +74,7 @@ public class MouseController extends MouseAdapter {
             public void actionPerformed(ActionEvent ae) {
                 lastActionSelected = Actions.PASTE;
                 savedString = textComponent.getText().replaceAll("[^-0-9]", "");
+                textComponent.setText("");
                 textComponent.paste();
                 pView.cleanResult();
                 pView.sendResult(textComponent.getText().replaceAll("[^-0-9]", ""));

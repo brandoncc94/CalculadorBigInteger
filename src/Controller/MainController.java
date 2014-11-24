@@ -50,7 +50,7 @@ public class MainController {
     //Operaciones
     //Envía el número al data input para que este sea manipulado como MyBigInteger
     public void sendOperationMessage(){
-        model.executeOperation(lastOperation);       
+        model.executeOperation(lastOperation);
         view.updateResult(model.getTotal());
     }
 }

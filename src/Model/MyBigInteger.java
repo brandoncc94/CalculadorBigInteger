@@ -485,30 +485,6 @@ public class MyBigInteger {
         }
         return true;
     }
-    /*
-    MyBigInteger number = new MyBigInteger(pNumber.valueOf()).abs();
-        
-        MyBigInteger cont = new MyBigInteger("5");
-        MyBigInteger w = new MyBigInteger("2");
-
-        if (number.valueOf().equals("2") || number.valueOf().equals("3"))
-                return true;
-        if (number.division(new MyBigInteger("2"), true).valueOf().equals("0")
-                || number.division(new MyBigInteger("3"), true).valueOf().equals("0"))
-            return false;   
-        
-        while(!new MyBigInteger(cont.valueOf()).multiply(new MyBigInteger(cont.valueOf())).higher(number.valueOf())){
-            System.out.println("i*i = " + new MyBigInteger(cont.valueOf()).multiply(new MyBigInteger(cont.valueOf())).valueOf());
-            System.out.println("i = " + cont.valueOf());
-            if(number.division(cont, true).valueOf().equals("0")){
-                return false;
-            }
-            cont = cont.add(w);
-            w = new MyBigInteger("6").sub(w);
-            System.out.println("w = "+  w.valueOf());
-        }
-        return true;
-    */
     
     //Obtener el factorial de un número
     public MyBigInteger fact(){

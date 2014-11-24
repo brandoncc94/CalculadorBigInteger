@@ -859,7 +859,7 @@ public class FrmCalculator extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPhiActionPerformed
 
     private void btnGBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGBActionPerformed
-        executeOperation("primo");
+        executeOperation("goldbach");
     }//GEN-LAST:event_btnGBActionPerformed
 
     private void btnMCDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMCDActionPerformed
@@ -879,7 +879,7 @@ public class FrmCalculator extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFactPrimaUnicaActionPerformed
 
     private void btnCantFactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCantFactActionPerformed
-        // TODO add your handling code here:
+        executeOperation("factores");
     }//GEN-LAST:event_btnCantFactActionPerformed
 
     private void btnModuleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModuleActionPerformed
@@ -899,15 +899,22 @@ public class FrmCalculator extends javax.swing.JFrame {
     
     public void executeOperation(String pType){
         if(!accessFlag){
-            accessFlag = true;
+            boolean unario = false;
+            if(tbxOperations.getText().length() <= 0 ){
+                accessFlag = true; 
+                controller.setLastOperation(pType);
+            }
+            if(pType.equals("abs") || pType.equals("!") || pType.equals("!prima") || pType.equals("goldbach")
+                    || pType.equals("fibo") || pType.equals("phi") || pType.equals("factores"))
+                unario = true;
+                
             minusFlag = true;
-            controller.setLastOperation(pType);
-            if(tbxOperations.getText().length() != 0 || pType.equals("abs") || pType.equals("!") 
-                    || pType.equals("!prima") || pType.equals("fibo") || pType.equals("phi") ){
-                tbxOperations.setText(tbxOperations.getText() + tbxResult.getText() + " | " +  controller.getLastOperation() + " | ");
+            if(tbxOperations.getText().length() != 0 || unario){
+                tbxOperations.setText(tbxOperations.getText() + tbxResult.getText() + " " + pType + " ");
                 controller.sendOperationMessage();
+                controller.setLastOperation(pType);
             }else{
-                tbxOperations.setText(tbxResult.getText() + controller.getLastOperation());
+                tbxOperations.setText(tbxResult.getText() + " " + controller.getLastOperation() + " ");
                 controller.backupNumber();
             }
         } 
