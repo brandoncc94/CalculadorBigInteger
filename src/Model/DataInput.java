@@ -81,6 +81,9 @@ public class DataInput {
                 case "!prima":
                     result = pNumber2.getPrimeFact();
                     break;
+                case "factores":
+                    result = pNumber2.getFactors();
+                    break;
                 case "fibo":
                     result = pNumber2.fibo();
                     break;

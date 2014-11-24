@@ -415,6 +415,7 @@ public class MyBigInteger {
     //Función de factorización prima única
     public MyBigInteger getPrimeFact(){
         MyBigInteger number = new MyBigInteger(bigNumber).abs();
+        if(isPrimo(number)) return number;
         MyBigInteger result = new MyBigInteger("");
         MyBigInteger cont = new MyBigInteger("2");
         
@@ -435,6 +436,7 @@ public class MyBigInteger {
     
     //Función para saber la cantidad de factores de un número
     public MyBigInteger getFactors(){
+        if(isPrimo(new MyBigInteger(bigNumber))) return new MyBigInteger("2");
         MyBigInteger result = getPrimeFact();
         result.setNumero(result.valueOf().replaceAll(" * ", ""));
         
@@ -474,7 +476,7 @@ public class MyBigInteger {
         if (number.valueOf().equals("2"))
             return true;   
         if (number.division(new MyBigInteger("2"),true).valueOf().equals("0"))
-            return false;   
+            return false;
         
         MyBigInteger backup = number.division(new MyBigInteger("2"), false);
         MyBigInteger cont = new MyBigInteger("3");
