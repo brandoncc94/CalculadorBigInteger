@@ -2,6 +2,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 public class MyBigInteger {
@@ -234,9 +235,7 @@ public class MyBigInteger {
         int num2Len = divisor.valueOf().length();
         
         int maxDigits = num1Len-num2Len;
-        
-        
-        
+         
         if(divisor.valueOf().equals("0")){
             System.out.println("Division by zero");
             return null;
@@ -349,7 +348,7 @@ public class MyBigInteger {
     //Obtener el máximo común divisor
     public MyBigInteger MCD(MyBigInteger pNumber){
         MyBigInteger result = new MyBigInteger(bigNumber);
-        if(result.valueOf().compareTo(pNumber.valueOf()) <  0)
+        if(pNumber.higher(result.valueOf()))
             return MCD_aux(result, new MyBigInteger(pNumber.valueOf()));
         else
             return MCD_aux(new MyBigInteger(pNumber.valueOf()), result);
@@ -363,8 +362,55 @@ public class MyBigInteger {
             return MCD_aux(pNumber2, pNumber1.division(pNumber2, true));
     }
     
+    //Función de fibonacci
+    public MyBigInteger fibo(){
+        if(bigNumber.equals("0")){
+            return this;
+        }
+        if(!higher("0")){
+            return null;
+        }
+        MyBigInteger one =  new MyBigInteger("1");
+        MyBigInteger I = new MyBigInteger("1");
+        MyBigInteger P = new MyBigInteger("0");
+        MyBigInteger U = new MyBigInteger("1");
+        while(!I.higher(bigNumber)){
+            I = I.add(one);
+            MyBigInteger tmp = P.add(U);
+            P=U;
+            U=tmp;
+        }
+        return U;
+    }
+    
+    //Funcion de phi
+    public MyBigInteger phi(){
+        if("1".equals(bigNumber)){
+            return this;
+        }
+        MyBigInteger n = new MyBigInteger(bigNumber);
+        MyBigInteger tot = new MyBigInteger(bigNumber);
+        MyBigInteger p = new MyBigInteger("2");
+        MyBigInteger one = new MyBigInteger("1");
+        while(!new MyBigInteger(p.valueOf()).multiply(new MyBigInteger(p.valueOf())).higher(n.valueOf()) 
+                || new MyBigInteger(p.valueOf()).multiply(new MyBigInteger(p.valueOf())).valueOf().equals(n.valueOf())){
+            if(n.division(p, true).valueOf().equals("0")){
+                tot = tot.division(p,false);
+                tot = tot.multiply(p.sub(one));
+                while(n.division(p, true).valueOf().equals("0"))
+                    n = n.division(p,false);
+            }
+            p = p.add(one);
+        }
+        if(!one.higher(n.valueOf())){
+            tot = tot.division(n,false);
+            tot = tot.multiply(n.sub(one));
+        }
+        return tot;
+    }
+
     //Función de factorización prima única
-    public MyBigInteger factPrimaUnica(){
+    public MyBigInteger getPrimeFact(){
         MyBigInteger number = new MyBigInteger(bigNumber).abs();
         MyBigInteger result = new MyBigInteger("");
         MyBigInteger cont = new MyBigInteger("2");
@@ -380,34 +426,41 @@ public class MyBigInteger {
                 cont = cont.add(new MyBigInteger("1"));
         }
         
-        /*String[] palabras = result.valueOf().trim().split(" ");
-        String resp = "", total = "";
-        int c = 1;
-        if(palabras.length > 0){
-            for (String palabra : palabras) {
-                
-                    System.out.println(c);
-                    System.out.println(resp);
-                    System.out.println(palabra);
-                    System.out.println("asdasd");
-                if(c == 1)
-                    resp = palabra;
-                if (resp.equals(palabra.trim()))
-                    c++;
-                else{
-                    if(c == 1)
-                        total += " * " + palabra + "^ 1";
-                    else{
-                        total += " * " + resp + "^" + String.valueOf(c - 1);
-                        c = 1;                        
-                    }
-                }                    
+        result.setNumero(result.valueOf().replaceFirst("\\*", ""));
+        return result;
+    }
+    
+    //Función para saber la cantidad de factores de un número
+    public MyBigInteger getFactors(){
+        MyBigInteger result = getPrimeFact();
+        result.setNumero(result.valueOf().replaceAll(" * ", ""));
+        
+        String numero = result.valueOf();
+        String backup = "";
+        ArrayList<Integer> cantFact = new ArrayList<>();
+        
+        String[] numArray = numero.split("\\*");
+        boolean flag = true;
+        for(int i = 0; i < numArray.length; i++){
+            if(i == 0){
+                backup = numArray[i];
+                cantFact.add(1);
             }
-            total += " * " + resp + "^" + String.valueOf(c - 1);
+            if(backup.equals(numArray[i]))
+                flag = false;
+            else{
+                flag = true;
+                cantFact.add(1);
+            }
+            cantFact.set(cantFact.size() - 1, cantFact.get(cantFact.size() - 1) + 1);
+            backup = numArray[i];
         }
         
-        result.setNumero(total.replaceFirst("\\*", ""));*/
-        result.setNumero(result.valueOf().replaceFirst("\\*", ""));
+        result.setNumero("1");
+        for (Integer factor : cantFact) {
+            result = result.multiply(new MyBigInteger(String.valueOf(factor)));
+        }
+        
         return result;
     }
     
@@ -415,23 +468,15 @@ public class MyBigInteger {
     public boolean isPrimo(MyBigInteger pNumber){
         MyBigInteger number = new MyBigInteger(pNumber.valueOf()).abs();
         
-        MyBigInteger cont = new MyBigInteger("2");
-
         if (number.valueOf().equals("2"))
             return true;   
         
-        MyBigInteger raiz = number.division(cont, false);
-        MyBigInteger backup = new MyBigInteger(raiz.valueOf());
-        
-        while(!backup.sub(raiz).valueOf().equals("0")){
-            backup = new MyBigInteger(raiz.valueOf());
-            raiz.setNumero(backup.add(number.division(backup, false)).division(cont, false).valueOf());
-        }        
-        
-        while (cont.valueOf().compareTo(raiz.valueOf()) <= 0){
-            if (number.division(cont, true).valueOf().equals("0")) 
+        MyBigInteger backup = number.division(new MyBigInteger("2"), false);
+        MyBigInteger cont = new MyBigInteger("3");
+        while (backup.higher(cont.valueOf())){
+            if (number.division(new MyBigInteger("2"), true).valueOf().equals("0")) 
                 return false;
-            cont = cont.add(new MyBigInteger("1"));
+            cont = cont.add(new MyBigInteger("2"));
         }
         return true;
     }
@@ -462,6 +507,57 @@ public class MyBigInteger {
         
         //Retornamos el nuevo número
         return result;
+    }
+    
+    //Función para averiguar Goldbach
+    public MyBigInteger getGoldBach(){
+        MyBigInteger backup = new MyBigInteger(bigNumber);
+        MyBigInteger backup2 = new MyBigInteger(bigNumber);
+        
+        if(isPrimo(backup))
+            return backup;
+        // Contar los primos
+        int primes = 0;
+        while(!backup.valueOf().equals("0")){
+            if(isPrimo(backup))
+                primes++;
+            backup = backup.sub(new MyBigInteger("1"));
+        }
+         
+        // Almacenar los primos en una lista
+        ArrayList<MyBigInteger> primesArray = new ArrayList<>();
+        int n = 0;
+        MyBigInteger cont = new MyBigInteger("1");
+        while(!backup2.valueOf().equals(cont.valueOf())){
+            if (isPrimo(cont)){
+                primesArray.add(new MyBigInteger(cont.valueOf()));
+            }
+            cont = cont.add(new MyBigInteger("1"));
+        }
+        
+        MyBigInteger left = new MyBigInteger("0");
+        MyBigInteger right = new MyBigInteger(String.valueOf(primes - 1));
+        String sum = "";
+        
+        while (true) {
+            if(left.valueOf().equals(right.valueOf())){
+                left = left.add(new MyBigInteger("1"));
+                if(left.valueOf().equals(String.valueOf(primes - 1)))
+                    break;
+                right.setNumero(String.valueOf(primes - 1));
+            }
+            
+            sum = primesArray.get(Integer.parseInt(left.valueOf())).add(
+                       primesArray.get(Integer.parseInt(right.valueOf()))).valueOf();
+            if(sum.equals(backup2.valueOf())){
+                return new MyBigInteger(String.valueOf(primesArray.get(Integer.parseInt(left.valueOf())).valueOf() 
+                        + " y " + primesArray.get(Integer.parseInt(right.valueOf())).valueOf()));
+            }
+            else if(backup.higher(sum)) left = left.add(new MyBigInteger("1"));
+            else right = right.sub(new MyBigInteger("1"));
+        }
+        
+        return backup2;
     }
     
     //Función de valor absoluto
