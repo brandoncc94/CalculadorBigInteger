@@ -389,9 +389,8 @@ public class MyBigInteger {
             return this;
         }
         MyBigInteger one = new MyBigInteger("1");
-        if(isPrimo(this)){
+        if(isPrimo(this))
             return new MyBigInteger(bigNumber).sub(one);
-        }
         MyBigInteger n = new MyBigInteger(bigNumber);
         MyBigInteger tot = new MyBigInteger(bigNumber);
         MyBigInteger p = new MyBigInteger("2");
@@ -481,7 +480,7 @@ public class MyBigInteger {
         MyBigInteger backup = number.division(new MyBigInteger("2"), false);
         MyBigInteger cont = new MyBigInteger("3");
         while (backup.higher(cont.valueOf())){
-            if (number.division(new MyBigInteger("2"), true).valueOf().equals("0")) 
+            if (number.division(cont, true).valueOf().equals("0")) 
                 return false;
             cont = cont.add(new MyBigInteger("2"));
         }
